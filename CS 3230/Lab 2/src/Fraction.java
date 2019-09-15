@@ -1,3 +1,10 @@
+/**
+ * Author: Daniel Silva
+ * CS: 3230
+ * <p>
+ * Lab: 2
+ */
+
 public class Fraction {
 
     private int numerator;
@@ -31,7 +38,7 @@ public class Fraction {
      * @return Fraction object from the two added fractions
      */
     public Fraction add(Fraction right) {
-        int num = numerator * right.denominator + right.numerator * denominator;
+        int num = ((numerator * right.denominator) + (right.numerator * denominator));
         int den = denominator * right.denominator;
         return new Fraction(num, den);
     }
@@ -43,7 +50,7 @@ public class Fraction {
      * @return Fraction object with from the two subtracted fractions
      */
     public Fraction sub(Fraction right) {
-        int num = numerator * right.denominator - right.numerator * denominator;
+        int num = ((numerator * right.denominator) - (right.numerator * denominator));
         int den = denominator * right.denominator;
         return new Fraction(num, den);
     }
@@ -100,7 +107,7 @@ public class Fraction {
     }
 
     /**
-     * Usng Euclid's Algorithm, finds the GCD of both fractions
+     * Using Euclid's Algorithm, finds the GCD of both fractions
      *
      * @param u
      * @param v
