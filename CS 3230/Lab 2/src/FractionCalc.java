@@ -55,7 +55,7 @@ public class FractionCalc {
      * @param myList
      */
     private static void addTokens(String expression, ArrayList<String> myList) {
-        StringTokenizer st = new StringTokenizer(expression, "-/*\t ", true);
+        StringTokenizer st = new StringTokenizer(expression, " *+/\t ", true);
         while (st.hasMoreTokens()) {
             String token = st.nextToken();
             if (!token.equals(" ") && !token.equals("\t"))
