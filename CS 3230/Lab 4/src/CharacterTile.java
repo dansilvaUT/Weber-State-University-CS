@@ -1,7 +1,10 @@
+import java.util.HashMap;
+
 public class CharacterTile extends Tile {
 
     protected char symbol;
 
+    protected static HashMap<String, String> characters = new HashMap<>();
     /**
      * Constructer initializes the symbol fields
      *
