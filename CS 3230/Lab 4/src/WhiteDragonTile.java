@@ -1,7 +1,6 @@
-public class WhiteDragonTile {
+public class WhiteDragonTile extends Tile {
 
     /**
-     *
      * @return "white dragon"
      */
     @Override
