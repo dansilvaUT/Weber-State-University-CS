@@ -1,10 +1,8 @@
 public class Bamboo1Tile extends PictureTile {
     /**
      * Constructor that initializes name of tile picture
-     *
-     * @param name
      */
-    public Bamboo1Tile(String name) {
+    public Bamboo1Tile() {
         super("Sparrow");
     }
 
