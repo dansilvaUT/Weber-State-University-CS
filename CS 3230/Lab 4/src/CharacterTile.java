@@ -5,6 +5,7 @@ public class CharacterTile extends Tile {
     protected char symbol;
 
     protected static HashMap<String, String> characters = new HashMap<>();
+
     /**
      * Constructer initializes the symbol fields
      *
@@ -12,6 +13,25 @@ public class CharacterTile extends Tile {
      */
     public CharacterTile(char symbol) {
         this.symbol = symbol;
+    }
+
+    static {
+        characters.put("1", "\u4E00");
+        characters.put("2", "\u4E8C");
+        characters.put("3", "\u4E09");
+        characters.put("4", "\u56DB");
+        characters.put("5", "\u4E94");
+        characters.put("6", "\u516D");
+        characters.put("7", "\u4E03");
+        characters.put("8", "\u516B");
+        characters.put("9", "\u4E5D");
+        characters.put("N", "\u5317");
+        characters.put("E", "\u6771");
+        characters.put("W", "\u8997");
+        characters.put("S", "\u5357");
+        characters.put("C", "\u4E2D");
+        characters.put("F", "\u767C");
+        characters.put("w", "\u842C");
     }
 
     /**
@@ -58,5 +78,9 @@ public class CharacterTile extends Tile {
             }
             return string;
         }
+    }
+
+    public String toChinese() {
+        return null;
     }
 }
