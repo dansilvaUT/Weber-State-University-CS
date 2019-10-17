@@ -44,6 +44,60 @@ public class CharacterTile extends Tile {
         return super.matches(other) && (this.symbol == ((CharacterTile) other).symbol);
     }
 
+    public String toChinese() {
+        String chineseCharacter = "";
+        switch (symbol) {
+            case '1':
+                chineseCharacter = Character.toString('\u4E00');
+                break;
+            case '2':
+                chineseCharacter = Character.toString('\u4E8C');
+                break;
+            case '3':
+                chineseCharacter = Character.toString('\u4E09');
+                break;
+            case '4':
+                chineseCharacter = Character.toString('\u56DB');
+                break;
+            case '5':
+                chineseCharacter = Character.toString('\u4E94');
+                break;
+            case '6':
+                chineseCharacter = Character.toString('\u516D');
+                break;
+            case '7':
+                chineseCharacter = Character.toString('\u4E03');
+                break;
+            case '8':
+                chineseCharacter = Character.toString('\u516B');
+                break;
+            case '9':
+                chineseCharacter = Character.toString('\u4E5D');
+                break;
+            case 'N':
+                chineseCharacter = Character.toString('\u5317');
+                break;
+            case 'E':
+                chineseCharacter = Character.toString('\u6771');
+                break;
+            case 'S':
+                chineseCharacter = Character.toString('\u5357');
+                break;
+            case 'W':
+                chineseCharacter = Character.toString('\u897F');
+                break;
+            case 'C':
+                chineseCharacter = Character.toString('\u4E2D');
+                break;
+            case 'F':
+                chineseCharacter = Character.toString('\u767C');
+                break;
+            default:
+                break;
+        }
+        return chineseCharacter;
+    }
+
     /**
      * toString method checks wether symbol is a character 1 through 9 or a character
      * N,E,W,S,C,F
@@ -80,7 +134,5 @@ public class CharacterTile extends Tile {
         }
     }
 
-    public String toChinese() {
-        return null;
-    }
+
 }
