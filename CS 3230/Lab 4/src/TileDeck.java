@@ -35,4 +35,35 @@ public class TileDeck {
         deck.add(new SeasonTile("Fall"));
         deck.add(new SeasonTile("Winter"));
     }
+
+    /**
+     * Shuffles the deck of tiles randomly
+     */
+    public void shuffle() {
+        Collections.shuffle(deck);
+    }
+
+    /**
+     * Shuffles the deck of tiles based on "gameNumber."
+     * Doing this will allow a player to replay a game represented by a game number
+     *
+     * @param gameNumber long
+     */
+    public void shuffle(long gameNumber) {
+        Collections.shuffle(deck, new Random(gameNumber));
+    }
+
+    /**
+     * Removes a tile from the deck and returns it;
+     * returns null if the deck is empty.
+     *
+     * @return tile removed from end of deck
+     */
+    public Tile deal() {
+        if (deck.isEmpty()) {
+            return null;
+        } else {
+            return deck.remove(deck.size() - 1);
+        }
+    }
 }
