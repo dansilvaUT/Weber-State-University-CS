@@ -5,19 +5,36 @@ public class Tile extends JPanel {
 
     private static final Dimension SIZE = new Dimension(200, 200);
     private static final Rectangle FACE = new Rectangle(18, 6, 54, 72);
-    private static final Polygon SIDE;
 
-    //TODO fix polygon dimensions.
+    private static Polygon side;
+    private static Polygon outerSide;
+    private static Polygon bottom;
+    private static Polygon outerBottom;
+
+
     static {
-        final int[] x = {14, 11, 22, 88};
-        final int[] y = {11, 22, 55, 44};
-        SIDE = new Polygon(x, y, 4);
+        final int[] x1 = {10, 18, 18, 10};
+        final int[] y1 = {12, 6, 78, 85};
+        side = new Polygon(x1, y1, 4);
+
+        final int[] x2 = {2, 10, 10, 2};
+        final int[] y2 = {18, 12, 88, 95};
+        outerSide = new Polygon(x2, y2, 4);
+
+        final int[] x3 = {18, 10, 65, 72};
+        final int[] y3 = {78, 88, 88, 78};
+        bottom = new Polygon(x3, y3, 4);
+
+        final int[] x4 = {10, 2, 57, 65};
+        final int[] y4 = {88, 97, 97, 88};
+        outerBottom = new Polygon(x4, y4, 4);
+
     }
 
     //Polygon gradient color 1
     private static final GradientPaint g0 = new GradientPaint(20, 100, Color.WHITE, 120, 0, Color.BLUE);
     //Polygon gradient color 2
-    private static final GradientPaint g1 = new GradientPaint(10, 110, Color.WHITE, 20, 0, Color.RED);
+    private static final GradientPaint g1 = new GradientPaint(10, 100, Color.WHITE, 60, 0, Color.BLUE);
 
     //Color Face
     private static final Color color = new Color(208, 215, 219);
@@ -42,9 +59,18 @@ public class Tile extends JPanel {
         Graphics2D g2D = (Graphics2D) g;
         g2D.setPaint(color);
         g2D.fill(FACE);
-        //TODO draw polygons
+
         g2D.setPaint(g0);
-        g2D.fill(SIDE);
+        g2D.fill(side);
+
+        g2D.setPaint(g1);
+        g2D.fill(outerSide);
+
+        g2D.setPaint(g0);
+        g2D.fill(bottom);
+
+        g2D.setPaint(g1);
+        g2D.fill(outerBottom);
     }
 
     public static void main(String[] args) {
