@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.util.HashMap;
 
 public class CharacterTile extends Tile {
@@ -13,6 +15,8 @@ public class CharacterTile extends Tile {
      */
     public CharacterTile(char symbol) {
         this.symbol = symbol;
+        this.setToolTipText(toString());
+        ;
     }
 
     static {
@@ -132,6 +136,88 @@ public class CharacterTile extends Tile {
             }
             return string;
         }
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
+
+        Font f = g.getFont();
+        f = f.deriveFont(f.getSize2D() * 2);
+        Font num = f.deriveFont(Font.ITALIC, f.getSize2D() * .5f);
+        Font wind = f.deriveFont(f.getSize2D() * 2f);
+
+        if (String.valueOf(symbol).matches("[0-9]")) {
+            drawWan(g2, f);
+            g2.drawString(characters.get((String.valueOf(symbol)).toString()), 35, 35);
+            g2.setColor(TOMATO);
+            g2.setFont(num);
+            g2.drawString(String.valueOf(symbol), 65, 20);
+        } else {
+            g2.setColor(TOMATO);
+            g2.setFont(num);
+            g2.drawString(String.valueOf(symbol), 65, 20);
+            Color rg = null;
+            switch (symbol) {
+                case 'C':
+                    rg = TOMATO;
+                    break;
+                case 'F':
+                    rg = LIME;
+                    break;
+            }
+            g2.setColor((symbol == 'C' || symbol == 'F') ? rg : Color.BLACK);
+            g2.setFont(wind);
+            g2.drawString(characters.get((String.valueOf(symbol)).toString()), 20, 60);
+        }
+
+    }
+
+    /**
+     * Draws the red character 'wan' at the bottom the character 1 through character 9 tiles
+     *
+     * @param g2 2D graphics object
+     * @param f  font object
+     */
+    private void drawWan(Graphics2D g2, Font f) {
+        g2.setFont(f);
+        g2.setColor(TOMATO);
+        g2.drawString(characters.get("W"), 32, 62);
+        g2.setColor(Color.BLACK);
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        JPanel tiles = new JPanel();
+        JScrollPane scroller = new JScrollPane(tiles);
+        tiles.setPreferredSize(new Dimension(200, 200));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("Character Tiles");
+        frame.add(scroller);
+
+        // Try something like this if your tiles don't fit on the screen.
+        // Replace "tile width" and "tile height" with your values.
+        //scroller.setPreferredSize(new Dimension(8 * 2, 40 + 2));
+
+        tiles.add(new CharacterTile('1'));
+        tiles.add(new CharacterTile('2'));
+        tiles.add(new CharacterTile('3'));
+        tiles.add(new CharacterTile('4'));
+        tiles.add(new CharacterTile('5'));
+        tiles.add(new CharacterTile('6'));
+        tiles.add(new CharacterTile('7'));
+        tiles.add(new CharacterTile('8'));
+        tiles.add(new CharacterTile('9'));
+        tiles.add(new CharacterTile('N'));
+        tiles.add(new CharacterTile('E'));
+        tiles.add(new CharacterTile('W'));
+        tiles.add(new CharacterTile('S'));
+        tiles.add(new CharacterTile('C'));
+        tiles.add(new CharacterTile('F'));
+
+        frame.pack();
+        frame.setVisible(true);
     }
 
 

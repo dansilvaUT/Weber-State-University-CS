@@ -1,16 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 public class Tile extends JPanel {
 
-    private static final Dimension SIZE = new Dimension(200, 200);
-    private static final Rectangle FACE = new Rectangle(18, 6, 54, 72);
+    private static final Dimension SIZE = new Dimension(80, 100);
+    private static final Rectangle FACE = new Rectangle(18, 6, 65, 72);
 
     private static Polygon side;
     private static Polygon outerSide;
     private static Polygon bottom;
     private static Polygon outerBottom;
 
+
+    public static final Color LIME = new Color(29, 207, 2);
+    public static final Color TOMATO = new Color(237, 99, 45);
 
     static {
         final int[] x1 = {10, 18, 18, 10};
@@ -21,15 +25,16 @@ public class Tile extends JPanel {
         final int[] y2 = {18, 12, 88, 95};
         outerSide = new Polygon(x2, y2, 4);
 
-        final int[] x3 = {18, 10, 65, 72};
+        final int[] x3 = {18, 10, 75, 82};
         final int[] y3 = {78, 88, 88, 78};
         bottom = new Polygon(x3, y3, 4);
 
-        final int[] x4 = {10, 2, 57, 65};
+        final int[] x4 = {10, 2, 68, 75};
         final int[] y4 = {88, 97, 97, 88};
         outerBottom = new Polygon(x4, y4, 4);
 
     }
+
 
     //Polygon gradient color 1
     private static final GradientPaint g0 = new GradientPaint(20, 100, Color.WHITE, 120, 0, Color.BLUE);
@@ -38,6 +43,7 @@ public class Tile extends JPanel {
 
     //Color Face
     private static final Color color = new Color(208, 215, 219);
+
 
     /**
      * Checks if both objects are instances of the same class
@@ -57,7 +63,8 @@ public class Tile extends JPanel {
 
         //Downcast Graphics to Graphics 2D to use method 'setPaint'
         Graphics2D g2D = (Graphics2D) g;
-        g2D.setPaint(color);
+
+        g2D.setPaint(g0);
         g2D.fill(FACE);
 
         g2D.setPaint(g0);
