@@ -35,6 +35,13 @@ public class Tile extends JPanel {
 
     }
 
+    /**
+     * Tile constructor that sets the prefered tile size as well as the opaque to false
+     */
+    public Tile() {
+        this.setPreferredSize(SIZE);
+        setOpaque(false);
+    }
 
     //Polygon gradient color 1
     private static final GradientPaint g0 = new GradientPaint(20, 100, Color.WHITE, 120, 0, Color.BLUE);
@@ -58,8 +65,6 @@ public class Tile extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        setOpaque(false);
-        setPreferredSize(SIZE);
 
         //Downcast Graphics to Graphics 2D to use method 'setPaint'
         Graphics2D g2D = (Graphics2D) g;
