@@ -6,12 +6,19 @@ public class Tile extends JPanel {
     private static final Dimension SIZE = new Dimension(80, 100);
     private static final Rectangle FACE = new Rectangle(18, 6, 65, 72);
 
+    //Polygon variables
     private static Polygon side;
     private static Polygon outerSide;
     private static Polygon bottom;
     private static Polygon outerBottom;
 
 
+    public int x;
+    public int y;
+    public int z;
+    private int zOrder = 0;
+
+    //Colors
     public static final Color LIME = new Color(29, 207, 2);
     public static final Color TOMATO = new Color(237, 99, 45);
 
@@ -38,7 +45,7 @@ public class Tile extends JPanel {
      * Tile constructor that sets the prefered tile size as well as the opaque to false
      */
     public Tile() {
-        this.setPreferredSize(SIZE);
+        this.setSize(SIZE);
         setOpaque(false);
     }
 
@@ -46,7 +53,6 @@ public class Tile extends JPanel {
     private static final GradientPaint g0 = new GradientPaint(20, 100, Color.WHITE, 120, 0, Color.BLUE);
     //Polygon gradient color 2
     private static final GradientPaint g1 = new GradientPaint(10, 100, Color.WHITE, 60, 0, Color.BLUE);
-
     //Color Face
     private static final Color color = new Color(208, 215, 219);
 
@@ -82,6 +88,34 @@ public class Tile extends JPanel {
 
         g2D.setPaint(g1);
         g2D.fill(outerBottom);
+    }
+
+    /**
+     * Sets Coordinates for layering tiles
+     * @param x
+     * @param y
+     * @param z
+     */
+    public void setCoordinates(int x, int y, int z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    /**
+     *
+     * @param zOrder
+     */
+    public void setZOrder(int zOrder) {
+        this.zOrder = zOrder;
+    }
+
+    /**
+     * Method for getting z order of clicked tile.
+     * @return
+     */
+    public int getZOrder() {
+        return zOrder;
     }
 
     public static void main(String[] args) {
