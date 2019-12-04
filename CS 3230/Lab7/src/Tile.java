@@ -22,6 +22,9 @@ public class Tile extends JPanel {
     public static final Color LIME = new Color(29, 207, 2);
     public static final Color TOMATO = new Color(237, 99, 45);
 
+    //NEW
+    public boolean highlight = false;
+
     static {
         final int[] x1 = {10, 18, 18, 10};
         final int[] y1 = {12, 6, 78, 85};

@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
-public abstract class PictureTile extends Tile {
+public class PictureTile extends Tile {
 
     public String name;
     private Image image;

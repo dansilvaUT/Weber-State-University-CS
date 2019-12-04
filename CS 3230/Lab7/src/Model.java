@@ -14,14 +14,18 @@ public class Model extends JFrame {
     private final int layerSize = 5;
 
     private int gameNumber;
-
+    //NEW
+    private ScrollDemo removedTiles;
+    private Tile selected;
     private GameBoard board;
 
     public Model(int gameNumber) {
         this.gameNumber = gameNumber;
+        removedTiles = new ScrollDemo();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(970, 600);
         board = new GameBoard();
+        createBottomPane();
         add(board);
         setVisible(true);
     }
@@ -161,11 +165,85 @@ public class Model extends JFrame {
         public void mousePressed(MouseEvent e) {
             Tile tile = (Tile) e.getSource();
             System.out.println(tile.toString() + " [" + tile.x + "," + tile.y + "," + tile.z + "] Z Order: " + tile.getZOrder());
-            tiles[tile.x][tile.y][tile.z] = null;
-            tile.removeMouseListener(this);
-            this.remove(tile);
-            revalidate();
-            repaint();
+            /**tiles[tile.x][tile.y][tile.z] = null;
+             tile.removeMouseListener(this);
+             this.remove(tile);
+             revalidate();
+             repaint();**/
+
+            if (e.getButton() == MouseEvent.BUTTON1) {
+
+                if (isTileOpen(tile)) {
+                    // No previously selected tile - select it
+                    if (selected == null) {
+                        selected = tile;
+                        selected.highlight = true;
+                        selected.repaint();
+                    }
+                    //Doesn't match with another tile or it matched with itself, deselect our selected
+                    else if (!(selected.matches(tile)) || (selected.x == tile.x && selected.y == tile.y && selected.z == tile.z)) {
+                        selected.highlight = false;
+                        selected.repaint();
+                        selected = null;
+                    }
+                    //Matches with another tile that is not itself - Delete both of them
+                    else if (selected.matches(tile) && !(selected.x == tile.x && selected.y == tile.y && selected.z == tile.z)) {
+
+                        //Removed the highlight, and removes the action listeners
+                        selected.highlight = false;
+                        tile.highlight = false;
+                        selected.removeMouseListener(this);
+                        tile.removeMouseListener(this);
+
+                        //Adds the tiles to the bottom pane
+                        removedTiles.addToUndo(selected, tile);
+
+                        //Sets the locations of those tiles to null - no tiles exist in that location
+                        tiles[selected.x][selected.y][selected.z] = null;
+                        tiles[tile.x][tile.y][tile.z] = null;
+
+                        //Removes the tiles from the board
+                        this.remove(selected);
+                        this.remove(tile);
+
+                        //No tile is selected anymore
+                        selected = null;
+
+                        //If there are 144 tiles in the bottom pane, it means the board is empty and the user won
+                        /*if (removedTiles.undoStack.size() != 144) {
+                            if (soundOn)
+                                stoneSound.play();
+                        } else {
+                            revalidate();
+                            repaint();
+                            startReward();
+                        }*/
+
+                    }
+
+                    //Really gross way of highlighting all potential matches so it's easy to find tiles
+                    for (int row = 0; row < xSize; row++) {
+                        for (int col = 0; col < ySize; col++) {
+                            for (int layer = 0; layer < layerSize; layer++) {
+                                if (tiles[row][col][layer] != null) {
+                                    if (selected != null) {
+                                        if (tiles[row][col][layer].matches(selected))
+                                            tiles[row][col][layer].highlight = true;
+                                        else
+                                            tiles[row][col][layer].highlight = false;
+                                    } else {
+                                        tiles[row][col][layer].highlight = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    revalidate();
+                    repaint();
+                }
+
+            }
         }
 
         @Override
@@ -220,6 +298,12 @@ public class Model extends JFrame {
             g.drawImage(backgroundImage, 250, 40, this);
         }
 
+    }
+
+    //Creates the bottom pane where removed tiles go
+    private void createBottomPane() {
+        this.setLayout(new BorderLayout());
+        this.add(removedTiles, BorderLayout.SOUTH);
     }
 
     public static void main(String[] args) {
